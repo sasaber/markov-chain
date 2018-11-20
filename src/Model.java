@@ -5,14 +5,22 @@ public class Model {
 
     // member variables
     private HashMap<String, ArrayList<Character>> dictionary; // a map of n-grams to list of possible next elements
+    private ArrayList<String> possibleBeginnings;
 
     // ctor
     public Model() {
         dictionary = new HashMap<>();
+        possibleBeginnings = new ArrayList<>();
     }
 
     // read text to build model
     public void readAndBuild(String str, int order){
+        // save the first encountered n-gram for a possible beginning
+        if (str.length() >= order){
+            this.possibleBeginnings.add(str.substring(0, order));
+        }
+
+        // build model by iterating over the given text
         for (int i = 0; i < str.length() - order; i++) {
             // extract gram
             String gram = str.substring(i, i + order);
@@ -37,6 +45,24 @@ public class Model {
         }
 
         return s.toString();
+    }
+
+    // returns whether an n-gram is found in the model or not
+    public boolean hasGram(String str){
+        return this.dictionary.containsKey(str);
+    }
+
+    // returns a list of all possible characters that come after a given n-gram
+    public ArrayList<Character> getPossibilities(String key){
+        if (!this.dictionary.containsKey(key)){
+            return null;
+        }
+        return this.dictionary.get(key);
+    }
+
+    // getter
+    public ArrayList<String> getPossibleBeginnings() {
+        return possibleBeginnings;
     }
 
     // abcdef   order = 3       length = 6
