@@ -87,6 +87,7 @@ public class siteReader {
 				geneSites.put(key, spliceSites);
 			}
 		}
+
 		}
 	}
 	
