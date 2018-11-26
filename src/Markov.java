@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -80,8 +81,30 @@ public class Markov {
         }
     }
 
-    public void predictSpliceSites(String str){
+    public void predictSpliceSites(String path){
+        try{
+            // read string from file
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            StringBuilder sequence = new StringBuilder();
+            sequence.append(reader.readLine());
+            // close buffered reader
+            reader.close();
 
+            // iterate over input string
+            for (int i = 0; i < sequence.length() - order; i++) {
+                // extract each n-gram
+                String gram = sequence.substring(i, i + order);
+                // get the list of characters that come after this n-gram in model
+                ArrayList<Character> possibilities = this.model.getDictionary().get(gram);
+                // if the char 's' has more than a 15% probability of being the next char
+                // then, add the index position to the list of predicted splice sites
+                if (Collections.frequency(possibilities, 's') > ((15 * possibilities.size())/100)) {
+                    spliceSites.add(i + order);
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 //    // choose a random character from list of possibilities
@@ -117,5 +140,9 @@ public class Markov {
 
     public String getGeneratedText() {
         return this.generatedText.toString();
+    }
+
+    public ArrayList<Integer> getSpliceSites() {
+        return this.spliceSites;
     }
 }

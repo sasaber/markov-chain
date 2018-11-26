@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Model {
-
     // member variables
     private HashMap<String, ArrayList<Character>> dictionary; // a map of n-grams to list of possible next elements
     private ArrayList<String> possibleBeginnings;
@@ -63,6 +62,11 @@ public class Model {
     // getter
     public ArrayList<String> getPossibleBeginnings() {
         return possibleBeginnings;
+    }
+
+
+    public HashMap<String, ArrayList<Character>> getDictionary() {
+        return dictionary;
     }
 
     // abcdef   order = 3       length = 6
