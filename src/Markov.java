@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Markov {
@@ -10,6 +11,7 @@ public class Markov {
     private Model model;                    // Markov model after reading text
     private StringBuilder generatedText;    // generated text using info in model
     private Random randomGenerator;         // to randomly choose n-gram from list of possibilities
+    private ArrayList<Integer> spliceSites; // stores the positions of predicted splice sites in a given gene
 
     // ctor
     public Markov(int order, int length){
@@ -18,6 +20,7 @@ public class Markov {
         this.model = new Model();
         this.generatedText = new StringBuilder();
         this.randomGenerator = new Random();
+        this.spliceSites = new ArrayList<>();
     }
 
     // build markov chain
@@ -55,6 +58,10 @@ public class Markov {
                 break;
             }
         }
+    }
+
+    public void predictSpliceSites(String str){
+
     }
 
 //    // choose a random character from list of possibilities
