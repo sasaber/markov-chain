@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +28,24 @@ public class Markov {
     // build markov chain
     public void buildChain(String str){
         this.model.readAndBuild(str, this.order);
+    }
+
+    // build markov chain from file
+    public void buildChainFromFile(String path){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            StringBuilder sequence = new StringBuilder();
+            String str = reader.readLine();
+            while (str != null){
+                sequence.append(str);
+                str = reader.readLine();
+            }
+           // System.out.println(sequence.toString());
+            reader.close();
+            this.model.readAndBuild(sequence.toString(), this.order);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void generateText(){
