@@ -90,12 +90,12 @@ public class nucleotideReader {
 		spliceWriter.close();
 		return builtString;
 	}
-	public static void main(String[] args) throws IOException, FileNotFoundException{
-		
-		nucleotideReader reader = new nucleotideReader("C:\\Bioinformatics\\trainers\\seqsTrimmed.nohomologs");
-		System.out.println(reader.getGeneSequences());
-		siteReader splicer = new siteReader("C:\\Bioinformatics\\trainers\\exons.dat.nohomologs");
-		insertSpliceToFile(reader.getGeneSequences(), splicer.getGeneSites(),"C:\\Bioinformatics\\projOutputs\\trainer.txt");
-		
-	}
+//	public static void main(String[] args) throws IOException, FileNotFoundException{
+//
+//		nucleotideReader reader = new nucleotideReader("C:\\Bioinformatics\\trainers\\seqsTrimmed.nohomologs");
+//		System.out.println(reader.getGeneSequences());
+//		siteReader splicer = new siteReader("C:\\Bioinformatics\\trainers\\exons.dat.nohomologs");
+//		insertSpliceToFile(reader.getGeneSequences(), splicer.getGeneSites(),"C:\\Bioinformatics\\projOutputs\\trainer.txt");
+//
+//	}
 }

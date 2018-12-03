@@ -5,16 +5,10 @@ import java.util.ArrayList;
 
 public class MarkovTester {
 
-    public static void main(String[] args){
-        Markov markov = new Markov(4, 1000);
-        String path = "/Users/sarahsaber/Documents/Academics/Fall18/CS123A/project/MarkovChain/data/trainer.txt";
+    public static Markov markov = new Markov(4, 1000);
+    public static String path = "/Users/sarahsaber/Documents/Academics/Fall18/CS123A/project/MarkovChain/data/trainer.txt";
 
-
-        markov.buildChainFromFile(path);
-        markov.predictSpliceSites("/Users/sarahsaber/Documents/Academics/Fall18/CS123A/project/MarkovChain/data/test.txt");
-        System.out.println(markov.getSpliceSites().toString());
-
-        // get actual splice sites and print for comparison
+    public static void printActualSpliceSites(){
         try{
             ArrayList<Integer> spliceSites = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -36,8 +30,32 @@ public class MarkovTester {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-//        markov.generateText();
-//        System.out.println(markov.getGeneratedText());
+    }
+
+    public static void main(String[] args){
+
+        try {
+            FastaReadFormatted data = new FastaReadFormatted("/Users/sarahsaber/Documents/Academics/Fall18/CS123A/project/MarkovChain/data/genesFastaFormat.txt");
+            ArrayList<String> seqs = data.getSeqs();
+            ArrayList<String> Ids = data.getGeneIDs();
+            String ID;
+            String seq;
+            markov.buildChainFromFile(path);
+            for(int i = 0; i < Ids.size(); i++) {
+                ID = Ids.get(i);
+                seq = seqs.get(i);
+
+                System.out.println("Predicted splice sites for: " + ID);
+//			System.out.println(seq);
+                markov.predictSpliceSitesFromString(seq);
+                System.out.println(markov.getSpliceSites().toString());
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+        // get actual splice sites and print for comparison
+        // printActualSpliceSites();
 
     }
 }

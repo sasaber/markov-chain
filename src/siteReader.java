@@ -102,8 +102,8 @@ public class siteReader {
 	}
 
 
-	public static void main(String[] args) throws IOException, FileNotFoundException{
-		siteReader reader = new siteReader("C:\\Bioinformatics\\genSplicer\\GeneSplicer.tar\\training_data_sets\\Arabidopsis\\exons.dat.nohomologs");
-		System.out.println(reader.getGeneSites());
-	}
+//	public static void main(String[] args) throws IOException, FileNotFoundException{
+//		siteReader reader = new siteReader("C:\\Bioinformatics\\genSplicer\\GeneSplicer.tar\\training_data_sets\\Arabidopsis\\exons.dat.nohomologs");
+//		System.out.println(reader.getGeneSites());
+//	}
 }

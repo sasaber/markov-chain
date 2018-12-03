@@ -107,6 +107,22 @@ public class Markov {
         }
     }
 
+    //Addition by Nikola. Identical in purpose to method above, with two differences: spliceSites is cleared when called, and sequence is taken as an input as opposed to read from a file
+    public void predictSpliceSitesFromString(String sequence) {
+        spliceSites = new ArrayList<>();
+        for (int i = 0; i < sequence.length() - order; i++) {
+            // extract each n-gram
+            String gram = sequence.substring(i, i + order);
+            // get the list of characters that come after this n-gram in model
+            ArrayList<Character> possibilities = this.model.getDictionary().get(gram);
+            // if the char 's' has more than a 15% probability of being the next char
+            // then, add the index position to the list of predicted splice sites
+            if (Collections.frequency(possibilities, 's') > ((15 * possibilities.size())/100)) {
+                spliceSites.add(i + order);
+            }
+        }
+    }
+
 //    // choose a random character from list of possibilities
 //    public String getRandomElement(ArrayList<Character> arr) {
 //        int index = randomGenerator.nextInt(arr.size());
