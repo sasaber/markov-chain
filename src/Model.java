@@ -69,11 +69,5 @@ public class Model {
         return dictionary;
     }
 
-    // abcdef   order = 3       length = 6
-    // abc
-    // bcd
-    // cde
-    // def
-
 
 }

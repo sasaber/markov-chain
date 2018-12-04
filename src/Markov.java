@@ -49,37 +49,6 @@ public class Markov {
         }
     }
 
-    public void generateText(){
-        // get a beginning n-gram
-        int index = randomGenerator.nextInt(this.model.getPossibleBeginnings().size());
-        String currentGram = this.model.getPossibleBeginnings().get(index);
-        this.generatedText.append(currentGram);
-
-        // Generate a new gram from model until you hit the target text length
-        for (int i = 0; i < this.length; i++){
-            // if the current n-gram is valid (found in model)
-            if (this.model.hasGram(currentGram)){
-                // get all next possibilities
-                ArrayList<Character> possibilities = this.model.getPossibilities(currentGram);
-
-                // choose a random character from the list of possibilities
-                index = randomGenerator.nextInt(possibilities.size());
-                String next = possibilities.get(index).toString();
-
-                // add to generated text
-                this.generatedText.append(next);
-
-                // get length of generated text so far
-                int generatedLengthSoFar = this.generatedText.length();
-                // update current gram to use it for looking up an n-gram in the next iteration
-                currentGram = this.generatedText.substring(generatedLengthSoFar - this.order, generatedLengthSoFar);
-            }
-            // if the current n-gram is not valid (the chain cannot find more possibilities)
-            else {
-                break;
-            }
-        }
-    }
 
     public void predictSpliceSites(String path){
         try{
@@ -122,12 +91,6 @@ public class Markov {
             }
         }
     }
-
-//    // choose a random character from list of possibilities
-//    public String getRandomElement(ArrayList<Character> arr) {
-//        int index = randomGenerator.nextInt(arr.size());
-//        return arr.get(index).toString();
-//    }
 
     // setters and getters
     public int getOrder() {

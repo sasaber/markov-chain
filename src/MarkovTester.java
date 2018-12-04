@@ -47,7 +47,7 @@ public class MarkovTester {
 
                 System.out.println("Predicted splice sites for: " + ID);
 //			System.out.println(seq);
-                markov.predictSpliceSitesFromString(seq);
+                 markov.predictSpliceSitesFromString(seq);
                 System.out.println(markov.getSpliceSites().toString());
             }
         } catch (IOException e) {
